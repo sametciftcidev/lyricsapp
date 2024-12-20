@@ -1,5 +1,6 @@
 import time
 import os
+import platform
 from json.decoder import JSONDecodeError
 
 import requests
@@ -24,7 +25,8 @@ class Sender(object):
     ):
         self._session = requests.Session()
         self._session.headers = {
-            'application': 'LyricsGenius'
+            'application': 'LyricsGenius',
+            'User-Agent': f'{platform.uname().node}'
         }
         if access_token is None:
             access_token = os.environ.get('GENIUS_ACCESS_TOKEN')
